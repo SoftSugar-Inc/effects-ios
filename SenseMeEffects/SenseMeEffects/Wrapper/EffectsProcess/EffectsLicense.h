@@ -1,0 +1,31 @@
+//
+//  License.h
+//  Effects
+//
+//  Created by sunjian on 2021/5/8.
+//  Copyright © 2021 sjuinan. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "st_mobile_common.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
+
+@interface EffectsLicense : NSObject
+
+/// 鉴权
+/// @param licensePath 授权文件路径
++ (BOOL)authorizeWithLicensePath:(NSString *)licensePath;
++ (BOOL)authorizeWithLicensePath:(NSString *)licensePath error:(NSError **)error;
+
+/// 鉴权
+/// @param dataLicense 授权文件数据
++ (BOOL)authorizeWithLicenseData:(NSData *)dataLicense;
++ (BOOL)authorizeWithLicenseData:(NSData *)dataLicense error:(NSError **)error;
+
+@end
+
+NS_ASSUME_NONNULL_END
+
+

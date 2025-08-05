@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHL-X8-YgD" userLabel="Button1">
+                                <rect key="frame" x="50" y="758" width="34" height="34"/>
+                                <state key="normal" image="main_image_icon"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t27-25-yN5" userLabel="Button2">
+                                <rect key="frame" x="330" y="758" width="34" height="34"/>
+                                <state key="normal" image="main_camera_icon"/>
+                                <connections>
+                                    <action selector="cameraAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6ST-eN-UZg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jWz-R6-RcO">
+                                <rect key="frame" x="162" y="730" width="90" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="KTe-ca-PNC"/>
+                                    <constraint firstAttribute="height" constant="90" id="Ocf-fF-Emg"/>
+                                </constraints>
+                                <state key="normal" image="main_takephoto_icon"/>
+                                <connections>
+                                    <action selector="takePhotoAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vc0-mz-zbD"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v8.5.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5On-7t-GJa">
+                                <rect key="frame" x="188" y="840" width="38" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="t27-25-yN5" secondAttribute="trailing" constant="50" id="9ae-IC-9TW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="XHL-X8-YgD" secondAttribute="bottom" constant="70" id="G7a-Iv-kev"/>
+                            <constraint firstItem="t27-25-yN5" firstAttribute="bottom" secondItem="XHL-X8-YgD" secondAttribute="bottom" id="TPH-nQ-qsw"/>
+                            <constraint firstItem="5On-7t-GJa" firstAttribute="top" secondItem="jWz-R6-RcO" secondAttribute="bottom" constant="20" id="kwa-Hc-uXh"/>
+                            <constraint firstItem="jWz-R6-RcO" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="o3a-2M-fVK"/>
+                            <constraint firstItem="XHL-X8-YgD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="s33-8B-SUd"/>
+                            <constraint firstItem="5On-7t-GJa" firstAttribute="centerX" secondItem="jWz-R6-RcO" secondAttribute="centerX" id="waf-ta-7Z6"/>
+                            <constraint firstItem="jWz-R6-RcO" firstAttribute="centerY" secondItem="XHL-X8-YgD" secondAttribute="centerY" id="ymY-SY-Ier"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="uA5-B1-Yyy"/>
+                    <connections>
+                        <outlet property="takePhoto" destination="jWz-R6-RcO" id="P1f-UE-YDU"/>
+                        <outlet property="versionLable" destination="5On-7t-GJa" id="7Oa-j2-v6K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-62" y="94"/>
+        </scene>
+    </scenes>
+    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+    <resources>
+        <image name="main_camera_icon" width="33.5" height="33.5"/>
+        <image name="main_image_icon" width="33.5" height="33.5"/>
+        <image name="main_takephoto_icon" width="135" height="135"/>
+    </resources>
+</document>

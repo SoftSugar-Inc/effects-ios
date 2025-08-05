@@ -1,0 +1,45 @@
+#Mac OS X Finder
+.DS_Store
+# Sparkle distribution Private Key (Don’t check me in!)
+dsa_priv.pem
+# XCode (and ancestors) per-user config (very noisy, and not relevant)
+*.mode1v3
+*.mode2v3
+*.perspective
+*.perspectivev3
+*.pbxuser
+# Xcode 4
+xcuserdata/
+project.xcworkspace/
+DerivedData
+# Generated files
+VersionX-revision.h
+# build products
+build/
+*.o
+# Other source repository archive directories (protects when importing)
+.hg
+.svn
+CVS
+# automatic backup files
+*~.nib
+*.swp
+*~
+~
+# MCV's FaceSDK 
+*.tgz
+mcv_facesdk/
+mcv_facesdk_ios/
+# Android
+.gradle
+.idea
+bin
+gen
+/android/SDKCloud/.metadata
+/android/SDKCloud/STAPI/.settings
+.iml
+.settings
+.classpath
+infer-out/
+ipa.sh
+*.lic

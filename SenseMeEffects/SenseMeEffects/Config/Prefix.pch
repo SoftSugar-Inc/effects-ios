@@ -1,0 +1,26 @@
+//
+//  Prefix.pch
+//  SenseMeEffects
+//
+//  Created by zhangbaoshan on 2021/6/3.
+//
+
+#ifndef Prefix_pch
+#define Prefix_pch
+
+#endif /* Prefix_pch */
+
+typedef void (^mxg_clean_up_block)(void);
+static inline void mxg_executeCleanupBlock (__strong mxg_clean_up_block *block) {
+    (*block)();
+}
+
+#if DEBUG
+    #define defer \
+        autoreleasepool{} \
+        __strong void(^block)(void) __attribute__((cleanup(mxg_executeCleanupBlock), unused)) = ^
+#else
+    #define defer \
+        try{} @finally{} \
+        __strong void(^block)(void) __attribute__((cleanup(mxg_executeCleanupBlock), unused)) = ^
+#endif
