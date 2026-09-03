@@ -510,3 +510,57 @@ typedef NS_ENUM(NSInteger, AVCaptureDevicePosition) {
 
 若需要重播GAN贴纸，参考2.4.5。
 
+## 3.5 脸型检测
+
+脸型检测基于 `human action` 的人脸检测结果，不是人脸属性检测。每张人脸会返回一个 `st_face_shape_t` 枚举值。
+
+### 3.5.1 前置条件
+
+1. 初始化 `STMobileWrapper` 时加载 SDK 交付的人脸检测模型。示例工程使用 `model.bundle` 中的人脸模型，实际文件名以当次 SDK 交付为准。
+2. 检测帧必须包含 `ST_MOBILE_FACE_DETECT`。
+3. 传入的图像旋转方向、像素格式、宽高和 `stride` 必须与实际数据一致。
+
+### 3.5.2 获取脸型
+
+如果已经在业务检测链路中获取到 `st_mobile_human_action_t`，应直接复用其中的 `p_faces`，不要为脸型额外重复检测一帧。
+
+```c
+for (int i = 0; i < humanAction.face_count; i++) {
+    const st_mobile_face_t *face = &humanAction.p_faces[i];
+    st_face_shape_t faceShape = ST_FACE_SHAPE_UNKNOWN;
+    st_result_t result = st_mobile_human_action_get_face_shape(humanActionHandle, face, &faceShape);
+    if (result == ST_OK) {
+        // 使用 faceShape，并可用 face->face106.ID 关联同一张人脸。
+    }
+}
+```
+
+配套 Wrapper 也提供了等价的便捷方法：
+
+```objective-c
+st_face_shape_t faceShape = [self.stMobileWrapper.effectsProcess detectFaceShape:face];
+```
+
+`face` 必须来自当前 `human action` 检测结果。请在该结果被 `st_mobile_human_action_delete` 释放之前完成脸型获取。
+
+### 3.5.3 结果枚举
+
+```c
+typedef enum st_face_shape_t {
+    ST_FACE_SHAPE_UNKNOWN,      // 未知
+    ST_FACE_SHAPE_NATURAL,      // 自然脸
+    ST_FACE_SHAPE_ROUND,        // 圆脸
+    ST_FACE_SHAPE_SQUARE,       // 方脸
+    ST_FACE_SHAPE_LONG,         // 长脸
+    ST_FACE_SHAPE_RECTANGLE     // 长方脸
+} st_face_shape_t;
+```
+
+### 3.5.4 异常与性能注意事项
+
+- `face_count == 0` 时不得访问 `p_faces`。
+- 检测失败、人脸过小、遮挡较重或姿态不符合要求时，应将 `ST_FACE_SHAPE_UNKNOWN` 作为正常降级结果。
+- 实时场景建议使用 `face106.ID` 维护每张人脸的结果，并对脸型做多帧稳定，避免临界脸型在单帧间跳变。
+- `human action` 检测、重置与销毁应使用同一串行队列，不要在处理帧时并发调用 `resetHumanActionError:`。
+
+
